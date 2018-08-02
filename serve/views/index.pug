@@ -1,0 +1,112 @@
+extends ./layout/default
+block title
+  title koa
+
+block content
+  include ./includes/head
+  .container-fluid
+    .sidabar
+    .content
+      .row
+        .col-md-6
+          .card
+            img.card-img-top(
+
+            )
+            .card-body
+              h4.card-title 标题
+              p.card-desc 描述
+            .card-footer
+              small.text-muted 更新
+        .col-md-6
+          .card
+            img.card-img-top(
+                src="http://p895eioxy.bkt.clouddn.com/wakuang.png",
+                data-video ='http://vt1.doubanio.com/201807281237/b7b030e961cdcd8b7d0afbd335634163/view/movie/M/402330791.mp4'
+            )
+            .card-body
+              h4.card-title 标题
+              p.card-desc 描述
+            .card-footer
+              small.text-muted 更新
+      .row
+        .col-md-6
+          .card
+            img.card-img-top(
+
+            )
+            .card-body
+              h4.card-title 标题
+              p.card-desc 描述
+            .card-footer
+              small.text-muted 更新
+        .col-md-6
+          .card
+            img.card-img-top(
+
+            )
+            .card-body
+              h4.card-title 标题
+              p.card-desc 描述
+            .card-footer
+              small.text-muted 更新
+      .row
+        .col-md-6
+          .card
+            img.card-img-top(
+
+            )
+            .card-body
+              h4.card-title 标题
+              p.card-desc 描述
+            .card-footer
+              small.text-muted 更新
+        .col-md-6
+          .card
+            img.card-img-top(
+
+            )
+            .card-body
+              h4.card-title 标题
+              p.card-desc 描述
+            .card-footer
+              small.text-muted 更新
+  #myModal.modal(tabindex="-1",role="dialog")
+    .modal-dialog(role='document')
+      .modal-header
+        .modal-title Modal title
+        button.close(type="button" data-dismiss="modal" aria-label="Close")
+          .span(aria-hidden="true") &times;
+      #videoModal.modal-content
+  include ./includes/script
+
+  script.
+    var player = null;
+    $(document).ready(function() {
+     $('#myModal').on('hidden.bs.modal',function(e) {
+      if(player &&  player.pause) player.pause()
+     })
+    $('.card-img-top').click(function(e) {
+        $('#myModal').modal('show')
+        var ovideo = $(this).data('video')
+        var image = $(this).attr('src')
+        if(!player) {
+        player = new DPlayer({
+        container:document.getElementById('videoModal'),
+        screenshot: true,
+        video:{
+           url:ovideo,
+           pic:image,
+           thumbnails:image
+          }
+        })
+        }else {
+          player.switchVideo({
+            url:ovideo,
+            pic:image,
+            type:'atuo'
+          })
+        }
+
+    })
+    })
